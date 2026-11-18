@@ -1,0 +1,6 @@
+วางไฟล์วิดีโอ 2 ไฟล์ไว้ในโฟลเดอร์นี้ โดยตั้งชื่อให้ตรงตามนี้ทุกตัวอักษร:
+
+  highlight-clip.mp4      (คลิป Pre-wedding Highlight — ไฟล์ "highlight clip.mp4" ใน Google Drive)
+  behind-the-scene.mp4    (คลิป Behind The Scene — ไฟล์ "behind the scene.mp4" ใน Google Drive)
+
+ถ้าไม่มีไฟล์ในโฟลเดอร์นี้ เว็บจะเปิดวิดีโอผ่าน Google Drive แทนโดยอัตโนมัติ
