@@ -1252,6 +1252,9 @@ p,h1,h2,h3,h4,figure {margin:0}
   inset: var(--lens-rim);
   overflow: hidden;
   border-radius: 50%;
+  -webkit-clip-path: circle(50% at 50% 50%);
+  clip-path: circle(50% at 50% 50%);
+  isolation: isolate;
   background: linear-gradient(180deg,transparent 62%,#d1d2da 95%),
               linear-gradient(90deg,#c9c8cd,#b0b0b9);
 }
@@ -5452,9 +5455,9 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
   });
   if ('IntersectionObserver' in window) {
     const watchClip = new IntersectionObserver(entries => {
-      clipInView = entries[entries.length - 1].intersectionRatio >= .4;
+      clipInView = entries[entries.length - 1].intersectionRatio >= .15;
       syncMomentVisibility();
-    }, { threshold:[0,.4] });
+    }, { threshold:[0,.15] });
     watchClip.observe(clip);
     site.addEventListener('wedding:enter', syncMomentVisibility, { once:true });
     document.addEventListener('visibilitychange', syncMomentVisibility);
@@ -7179,9 +7182,27 @@ window.weddingMedia = {
     lastTarget = null;
   }
 
-  function isMediaPlaying() {
+  // hand in hand: keep moving until the clip sits in the middle of the screen, then wait while both clips play once
+  let lensEnds = 0;
+  let lensWatched = false;
+  let lensHolding = false;
+  function lensHolds() {
     const clip = document.getElementById('lensVideo');
-    return window.weddingMedia?.videoHoldsScroll?.() || (clip && !clip.paused && !clip.ended);
+    if (!clip) return false;
+    const box = clip.getBoundingClientRect(), view = window.innerHeight;
+    if (box.bottom < 0 || box.top > view) { lensEnds = 0; lensWatched = false; lensHolding = false; return false; }
+    // a clip that just ended counts as still playing: the next one starts a moment later
+    const active = document.getElementById('momentPlay')?.getAttribute('aria-pressed') === 'true' || (!clip.paused && !clip.ended) || (lensHolding && clip.ended);
+    lensHolding = active && !lensWatched && box.top + box.height / 2 <= view / 2 + 4;
+    return lensHolding;
+  }
+  document.addEventListener('ended', event => {
+    if (event.target?.id !== 'lensVideo' || !lensHolding) return;
+    if (++lensEnds >= 2) { lensWatched = true; lensHolding = false; }
+  }, true);
+
+  function isMediaPlaying() {
+    return window.weddingMedia?.videoHoldsScroll?.() || lensHolds();
   }
 
   function isBlocked() {
@@ -7218,6 +7239,7 @@ window.weddingMedia = {
   function step(time) {
     frame = 0;
     if (!enabled || button.dataset.state !== 'moving') return;
+    if (lensHolds()) { stopFrame(); refresh(); return; }
 
     // Layout and the mobile browser chrome can advance the native scroll
     // offset without a guest gesture. Rebase without starting the idle hold.
