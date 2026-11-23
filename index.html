@@ -468,8 +468,6 @@ p,h1,h2,h3,h4,figure {margin:0}
 .moment-actions .text-link {padding-inline:3px}
 .moments-player {position:relative;width:100%;height:100%}
 .moment-full {display:inline-flex;align-items:center;gap:.35em}
-.moment-sound {position:absolute;left:50%;bottom:12px;z-index:2;transform:translateX(-50%);padding:.45em .9em;border:1px solid #e2c08a;border-radius:999px;background:#fff8fcf2;color:#4a2f4f;font:600 .78rem/1.2 var(--sans);white-space:nowrap;box-shadow:0 8px 18px -8px #1a0a22;cursor:pointer;animation:moment-sound-in .4s ease both}
-@keyframes moment-sound-in {from {opacity:0;translate:0 6px}}
 .moment-dialog {width:100vw;height:100vh;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;border:0;background:transparent;overflow:hidden}
 .moment-dialog[open] {display:grid;place-items:center}
 .moment-dialog::backdrop {background:#140b1bf2}
@@ -510,8 +508,8 @@ p,h1,h2,h3,h4,figure {margin:0}
 .toast.show {transform:translate(-50%,0);opacity:1;visibility:visible}
 
 /* Viewport choreography preserves copy and geometry during reveals */
-.motion-ready .reveal {transition:opacity .55s var(--spring),translate .62s var(--spring),scale .62s var(--spring)}
-.motion-ready .reveal.reveal-pending {opacity:0;translate:0 22px;scale:.98}
+.motion-ready .reveal {transition:opacity .95s var(--spring),translate 1.05s var(--spring),scale 1.05s var(--spring)}
+.motion-ready .reveal.reveal-pending {opacity:0;translate:0 30px;scale:.97}
 .motion-ready .reveal.reveal-pending:has(:focus-visible:not([tabindex="-1"])) {opacity:1;translate:none;scale:none}
 .type-screen {position:relative;display:grid}
 .type-screen>.type-glyph,.type-screen>.type-reserve {grid-area:1/1;white-space:pre-wrap;overflow-wrap:anywhere}
@@ -1479,7 +1477,10 @@ p,h1,h2,h3,h4,figure {margin:0}
 .tl-time small {font:600 .74rem/1 var(--sans);letter-spacing:0;margin-inline-start:.26em}
 .tl-body h3 {font-size:clamp(1rem,2.1vw,1.45rem);font-weight:700;line-height:1.43;margin-top:.30em;color:#48304f}
 .tl-en {font:500 italic clamp(1.13rem,2.6vw,1.6rem)/1.18 var(--display);color:#775672;margin-top:.16em}
-.tl-desc {font-size:clamp(.86rem,1.7vw,1rem);line-height:1.57;color:#64516a;margin-top:.48em;text-wrap:pretty}
+.tl-desc {font-size:clamp(.86rem,1.7vw,1rem);line-height:1.7;color:#64516a;margin-top:.48em;padding-block:.08em;text-wrap:pretty;overflow:visible}
+.tl-desc .nw {white-space:nowrap}
+.schedule-venue {display:inline-flex;align-items:center;gap:.4em;margin-top:.55em;padding:.32em .9em .36em .7em;border:1px solid #d9bf96;border-radius:999px;background:#fffaf4cc;color:#7a5a3a;font:600 clamp(.86rem,1.5vw,.98rem)/1.3 var(--sans);letter-spacing:.03em}
+.schedule-venue svg {width:1.05em;height:1.05em;fill:none;stroke:#b8894a;stroke-width:1.8}
 
 @media (max-width:690px) {
   .schedule-head {grid-template-columns:minmax(0,1fr);justify-items:center;gap:15px;margin-bottom:clamp(27px,9vw,45px);text-align:center}
@@ -2870,6 +2871,10 @@ html.auto-scroll-moving {
 .video-wish-long .button {margin-top:1.15em}
 .video-wishes-layout {max-width:660px;grid-template-columns:minmax(0,1fr)}
 .video-wish-submit .video-wish-long-btn {gap:.45em}
+/* sections far from the screen pause their looping decorations (smoother scrolling) */
+.is-far, .is-far *, .is-far *::before, .is-far *::after {animation-play-state:paused !important}
+.scroll-progress, .hero-orbit, .hero-card-backdrop, .hero-bloom {will-change:transform}
+#lensVideo::-webkit-media-controls-mute-button, #lensVideo::-webkit-media-controls-volume-slider, #lensVideo::-webkit-media-controls-volume-control-container {display:none !important}
 .person-role {margin-bottom:.3em;font:600 .66rem/1.2 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:#8d6a82}
 @media (max-width:640px) {
   .couple-names {gap:6px}
@@ -4169,7 +4174,7 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
 <button class="chem-tile chem-tile--cell" type="button" data-chem-index="8" aria-label="ดูภาพชุดกาวน์ที่ 9" style="--col:1;--row:2;--offset:1"><span class="hex-ring"><span class="honey-photo-window"><img class="honey-photo-soft" data-gid="1AIY63wsvcV1VMH7mnoDvbx4gi2e8VUKb" width="840" height="560" data-size="840" alt="" loading="lazy"><img class="honey-photo-face" data-gid="1AIY63wsvcV1VMH7mnoDvbx4gi2e8VUKb" width="840" height="560" data-size="840" alt="" loading="lazy" style="--face-width:123.3%;--face-left:-4.87%;--face-top:17.95%"></span></span></button>
 <button class="chem-tile chem-tile--cell" type="button" data-chem-index="9" aria-label="ดูภาพชุดกาวน์ที่ 10" style="--col:2;--row:2;--offset:0"><span class="hex-ring"><span class="honey-photo-window"><img class="honey-photo-soft" data-gid="1uSjFW0rdEGXp8vRcCVdAQybuJZZQkWGI" width="560" height="840" data-size="840" alt="" loading="lazy"><img class="honey-photo-face" data-gid="1uSjFW0rdEGXp8vRcCVdAQybuJZZQkWGI" width="560" height="840" data-size="840" alt="" loading="lazy" style="--face-width:77.5%;--face-left:17.06%;--face-top:8.9%"></span></span></button></div></div>
         <figure class="little-moments reveal" aria-labelledby="moments-title">
-          <div class="moments-video"><div class="moments-player" id="momentPlayer"><video id="lensVideo" muted playsinline webkit-playsinline disableremoteplayback preload="none" data-file="videos/hand-in-hand.mp4" data-voice-start="111.7" data-voice-end="142.6" poster="data:image/webp;base64,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" aria-label="คลิปเรื่องราวของบ่าวสาว"></video><button type="button" class="moment-sound" id="momentSound" hidden>🔊 เปิดเสียง</button></div></div>
+          <div class="moments-video"><div class="moments-player" id="momentPlayer"><video id="lensVideo" muted playsinline webkit-playsinline disableremoteplayback preload="none" data-file="videos/hand-in-hand.mp4" poster="data:image/webp;base64,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" aria-label="คลิปเรื่องราวของบ่าวสาว"></video></div></div>
           <figcaption>
             <p class="eyebrow">OUR LITTLE MOMENTS</p>
             <h3 id="moments-title" lang="en">Hand in hand,<br><i>into forever</i></h3>
@@ -4194,6 +4199,7 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
             <p class="eyebrow" lang="en">THE WEDDING PROGRAMME</p>
             <h2 class="section-title" id="schedule-title" lang="en">The <i>Celebration</i></h2>
             <p class="schedule-subtitle">กำหนดการพิธีมงคลสมรส</p>
+            <p class="schedule-venue" lang="en"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21.5s-6.5-6.1-6.5-11.2A6.5 6.5 0 0 1 12 3.8a6.5 6.5 0 0 1 6.5 6.5c0 5.1-6.5 11.2-6.5 11.2Z"/><circle cx="12" cy="10.3" r="2.3"/></svg>@Jepa Steak House</p>
           </div>
                     <time class="schedule-date" datetime="2027-01-09">
             <span class="sr-only">วันเสาร์ที่ 9 มกราคม พ.ศ. 2570</span>
@@ -4216,7 +4222,7 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
               <time class="tl-time" datetime="06:39">06:39 <small>น.</small></time>
               <h3>พิธีสงฆ์</h3>
               <p class="tl-en" lang="en">Morning Blessing</p>
-              <p class="tl-desc">เริ่มต้นวันมงคลด้วยการทำบุญเลี้ยงพระ</p>
+              <p class="tl-desc">มาเอาบุญนำกันแต่เช้า <span class="nw">ให้บุญหนุนนำความฮัก</span><span class="nw">ของเฮาสองคน</span></p>
             </div>
           </li>
           <li class="tl-card">
@@ -4225,7 +4231,7 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
               <time class="tl-time" datetime="07:29">07:29 <small>น.</small></time>
               <h3>แห่ขันหมาก</h3>
               <p class="tl-en" lang="en">Khan Maak Procession</p>
-              <p class="tl-desc">ขบวนขันหมากเจ้าบ่าวแห่ขอเจ้าสาว ณ สวนอาหารเจ๊ภา สเต็กเฮ้าส์</p>
+              <p class="tl-desc"><span class="nw">ขันหมากมาละเด้อ!!!</span> <span class="nw">มาม่วนนำกัน</span> <span class="nw">ส่งเจ้าบ่าวไปขอคนฮัก</span></p>
             </div>
           </li>
           <li class="tl-card">
@@ -4234,7 +4240,7 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
               <time class="tl-time" datetime="08:29">08:29 <small>น.</small></time>
               <h3>บายศรีสู่ขวัญ · รดน้ำสังข์</h3>
               <p class="tl-en" lang="en">Water Blessing</p>
-              <p class="tl-desc">ผูกข้อมือรับขวัญ และร่วมรดน้ำสังข์อวยพรบ่าวสาว</p>
+              <p class="tl-desc"><span class="nw">ผูกแขนเอาขวัญ</span> <span class="nw">รดน้ำสังข์รับพร</span> <span class="nw">ให้เฮาสองคนฮักแพงกัน</span><span class="nw">ตลอดไป</span></p>
             </div>
           </li>
           <li class="tl-card">
@@ -4243,7 +4249,7 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
               <time class="tl-time" datetime="12:09">12:09 <small>น.</small></time>
               <h3>ฉลองมงคลสมรส</h3>
               <p class="tl-en" lang="en">Wedding Celebration</p>
-              <p class="tl-desc">ร่วมรับประทานอาหารและเฉลิมฉลองไปด้วยกัน</p>
+              <p class="tl-desc"><span class="nw">มากินข้าวนำกันเด้อ</span> <span class="nw">อิ่มท้อง อิ่มใจ</span> <span class="nw">ฉลองมื้อแห่งความฮัก</span><span class="nw">ไปนำกัน</span></p>
             </div>
           </li>
 
@@ -5202,19 +5208,27 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
   const nav = $$('.nav-links a').map(link => ({ link, target:$(link.getAttribute('href')) }));
   let currentNav = null;
   let framePending = false;
+  const heroDrift = $$('.hero-orbit, .hero-card-backdrop');
+  const heroBloom = $('.hero-bloom');
+  // section positions, measured once and again whenever the page changes size (photos loading, opening cards)
+  let navTops = null;
+  if ('ResizeObserver' in window) new ResizeObserver(() => { navTops = null; }).observe(site);
+  addEventListener('resize', () => { navTops = null; });
   function renderScroll() {
     const y = scrollY;
     const height = innerHeight;
     const total = document.documentElement.scrollHeight - height;
+    if (!navTops) navTops = nav.map(({ target }) => target ? target.getBoundingClientRect().top + y : Infinity);
     let nearest = null;
-    nav.forEach(({ link, target }) => {
-      if (target && target.getBoundingClientRect().top < height * .31) nearest = link;
+    nav.forEach(({ link }, index) => {
+      if (navTops[index] - y < height * .31) nearest = link;
     });
 
     progress.style.transform = 'scaleX(' + (total > 0 ? y / total : 0) + ')';
     if (y < height && !motion.matches) {
-      hero.style.setProperty('--orbit-y', (y * .062) + 'px');
-      hero.style.setProperty('--bloom-y', (y * -.075) + 'px');
+      const orbit = (y * .062).toFixed(1) + 'px';
+      heroDrift.forEach(node => node.style.setProperty('--orbit-y', orbit));
+      heroBloom?.style.setProperty('--bloom-y', (y * -.075).toFixed(1) + 'px');
     }
     if (nearest !== currentNav) {
       currentNav?.removeAttribute('aria-current');
@@ -5229,14 +5243,22 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
     requestAnimationFrame(renderScroll);
   }, { passive:true });
 
+  if ('IntersectionObserver' in window) {
+    const farAway = new IntersectionObserver(entries => {
+      entries.forEach(entry => entry.target.classList.toggle('is-far', !entry.isIntersecting));
+    }, { rootMargin: '400px 0px' });
+    $$('#site > main > section, #site section.section, #site > header, #site footer').forEach(node => farAway.observe(node));
+  }
+
   if ('IntersectionObserver' in window && !motion.matches) {
     const revealItems = $$('#site .reveal, .hero-copy, .hero-visual, .dress-layout, .gallery-shell, .guestbook, .lab-shelf');
     const repeatReveal = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) entry.target.classList.add('reveal-pending');
-        else if (entry.intersectionRatio >= .13) entry.target.classList.remove('reveal-pending');
+        // a fifth of it on screen (or, for tall blocks, a third of the screen) above the bottom edge zone
+        else if (entry.intersectionRatio >= .2 || entry.intersectionRect.height >= entry.rootBounds.height * .25) entry.target.classList.remove('reveal-pending');
       });
-    }, { threshold:[0,.13], rootMargin:'-3% 0px -4% 0px' });
+    }, { threshold:Array.from({ length:21 }, (_, i) => i / 20), rootMargin:'-3% 0px -18% 0px' });
 
     const segmenter = typeof Intl.Segmenter === 'function' ? new Intl.Segmenter('th', { granularity:'grapheme' }) : null;
     const copyStates = new Map($$('[data-type]').map(node => {
@@ -5287,7 +5309,7 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
           typeLine(node, state);
         }
       });
-    }, { threshold:[0,.58], rootMargin:'-3% 0px -4% 0px' });
+    }, { threshold:[0,.58], rootMargin:'-3% 0px -18% 0px' });
 
     const parents = $('.parents');
     const invitation = parents.closest('.invitation');
@@ -5337,28 +5359,21 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
     window.openGalleryPhoto?.(labPhotos[Number(tile.dataset.chemIndex)], labPhotos, 'Lab Partners for Life');
   }));
 
-  // hand in hand: one story video from GitHub. It plays silently with the page song. At the proposal the song
-  // fades out and the real voices play, then the song comes back.
+  // hand in hand: one story video from GitHub, always silent. The page song plays over it.
   const clip = $('#lensVideo');
   const clipPlayer = $('#momentPlayer');
   const clipHome = clipPlayer.parentElement;
   const clipPlay = $('#momentPlay');
   const clipFull = $('#momentFull');
-  const clipSound = $('#momentSound');
   const momentDialog = $('#momentDialog');
   const momentStage = $('#momentStage');
   const clipUrl = new URL(clip.dataset.file, document.baseURI).href;
-  const voiceFrom = Number(clip.dataset.voiceStart) || 0;
-  const voiceTo = Number(clip.dataset.voiceEnd) || 0;
   let clipInView = false;
   let clipPausedByGuest = false;
   let clipFinished = false;
   let clipLoading = false;
   let clipRequest = 0;
   let ownPause = false;
-  let voiceOn = false;
-  let voiceRefused = false;
-  let voiceStartedAt = 0;
 
   const clipActive = () => clipLoading || (!clip.paused && !clip.ended);
   const clipShowing = () => momentDialog.open || (site.classList.contains('is-invited') && clipInView && !document.hidden);
@@ -5367,16 +5382,14 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
     clipPlay.textContent = playing ? 'หยุดคลิป' : 'เล่นคลิป';
     clipPlay.setAttribute('aria-pressed', String(playing));
   }
-  function ensureClipSource() {
-    if (!clip.getAttribute('src')) clip.src = clipUrl;
-  }
   function playMoment(manual = false) {
-    ensureClipSource();
+    if (!clip.getAttribute('src')) clip.src = clipUrl;
     if (clipFinished || clip.ended) {
       clipFinished = false;
       clip.currentTime = 0;
     }
     if (clipActive()) return;
+    clip.muted = true;
     const request = ++clipRequest;
     clipLoading = true;
     clip.play().then(() => {
@@ -5402,51 +5415,6 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
     }
     updateMomentControls();
   }
-
-  // proposal voices
-  const inVoice = () => clip.currentTime >= voiceFrom && clip.currentTime < voiceTo;
-  // a phone that may not play sound without a tap stops the video right after it is unmuted
-  const soundRefused = () => voiceOn && clip.paused && !ownPause && !clipPausedByGuest && !clip.ended && clipShowing() && performance.now() - voiceStartedAt < 2000;
-  function carryOnSilently() {
-    voiceOn = false;
-    voiceRefused = true;
-    clip.muted = true;
-    window.weddingMedia?.restoreAfterVoice?.();
-    playMoment();
-  }
-  function startVoice() {
-    voiceOn = true;
-    voiceStartedAt = performance.now();
-    clip.muted = false;
-    clipSound.hidden = true;
-    window.weddingMedia?.duckForVoice?.();
-  }
-  function stopVoice() {
-    voiceOn = false;
-    clip.muted = true;
-    window.weddingMedia?.restoreAfterVoice?.();
-  }
-  function syncVoice() {
-    if (soundRefused()) {
-      carryOnSilently();
-      return;
-    }
-    const wanted = clipShowing() && !clip.paused && !clip.ended && inVoice();
-    if (voiceOn && !wanted) stopVoice();
-    else if (!voiceOn && wanted && !voiceRefused && window.weddingMedia?.soundOn?.()) startVoice();
-    // song switched off, or this phone wants a tap first: offer a button for the voices
-    clipSound.hidden = voiceOn || !wanted;
-  }
-  clipSound.addEventListener('click', () => {
-    voiceRefused = false;
-    voiceOn = true;
-    voiceStartedAt = 0;
-    clip.muted = false;           // inside the tap, so every browser allows the sound
-    clipSound.hidden = true;
-    window.weddingMedia?.duckForVoice?.();
-    if (clip.paused) playMoment(true);
-  });
-
   function syncMomentVisibility() {
     if (!clipShowing()) {
       pauseMoment();
@@ -5454,7 +5422,6 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
         clipFinished = false;
         clip.currentTime = 0;
       }
-      syncVoice();
       return;
     }
     if (!motion.matches && !clipPausedByGuest && !clipFinished) playMoment();
@@ -5465,31 +5432,26 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
     if (clipPausedByGuest) pauseMoment();
     else playMoment(true);
   });
+  clip.addEventListener('volumechange', () => { if (!clip.muted) clip.muted = true; });   // only the page song is heard
   clip.addEventListener('play', () => {
-    if (momentDialog.open) clipPausedByGuest = false;      // the guest used the video's own play button
+    if (momentDialog.open) clipPausedByGuest = false;      // the video's own play button
     updateMomentControls();
-    syncVoice();
   });
   clip.addEventListener('pause', () => {
-    if (soundRefused()) carryOnSilently();
-    else if (!ownPause && !clip.ended && momentDialog.open) clipPausedByGuest = true;   // the video's own pause button
+    if (!ownPause && !clip.ended && momentDialog.open) clipPausedByGuest = true;   // the video's own pause button
     ownPause = false;
     updateMomentControls();
-    syncVoice();
   });
-  clip.addEventListener('timeupdate', syncVoice);
-  clip.addEventListener('seeked', syncVoice);
   clip.addEventListener('ended', () => {
     clipFinished = true;
     updateMomentControls();
-    syncVoice();
   });
   clip.addEventListener('error', () => {
     clipLoading = false;
     updateMomentControls();
   });
 
-  // full size: the same video moves into a full-screen dialog, so it keeps playing (and the page song keeps going)
+  // full size: the same video moves into a full-screen dialog, so it keeps playing (the page song keeps going)
   clipFull.addEventListener('click', () => {
     momentStage.append(clipPlayer);
     clip.controls = true;
@@ -5513,15 +5475,7 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
     }, { threshold:[0,.15] });
     watchClip.observe(clipHome);
   }
-  site.addEventListener('wedding:enter', () => {
-    // the opening tap lets this video play its voices later on iPhone/iPad: start it silently and stop at once
-    ensureClipSource();
-    const unlock = clip.play();
-    ownPause = true;
-    clip.pause();
-    unlock?.catch?.(() => {});
-    syncMomentVisibility();
-  }, { once:true });
+  site.addEventListener('wedding:enter', syncMomentVisibility, { once:true });
   document.addEventListener('visibilitychange', syncMomentVisibility);
   motion.addEventListener?.('change', event => {
     if (event.matches) pauseMoment();
@@ -5735,6 +5689,7 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
   let swipeStart = null;
   let activePanel = null;
   let playTrack = true;
+  let tour = null;           // auto-scroll's guided run through the photos (see below)
   let nextAdvanceAt = performance.now() + startDelay;
   let lastReported = -Infinity;
   let controlFrame = 0;
@@ -5853,7 +5808,7 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
     if (!activePanel || document.hidden || dialog.open || !playTrack || motionPreference.matches) return false;
     return performance.now() >= nextAdvanceAt && isTrackVisible() &&
       !activePanel.contains(document.activeElement) &&
-      !(hoverDevice.matches && activePanel.matches(':hover'));
+      !(hoverDevice.matches && !tour && activePanel.matches(':hover'));   // during the tour a resting mouse pointer doesn't stop it
   }
 
   function stopTrack() {
@@ -5879,6 +5834,7 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
         // Increasing the scroll offset moves the photos left. The first copy
         // lines up exactly with the start, so wrapping preserves the same view.
         activePanel.scrollLeft = (Math.max(0, activePanel.scrollLeft) + pixels) % loopWidth;
+        if (tour) tourStep(pixels);
       }
     }
     lastTrackFrame = time;
@@ -6085,6 +6041,7 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
   trackMotion.addEventListener('click', () => {
     galleryActivity();
     playTrack = !playTrack;
+    if (!playTrack && tour) { window.weddingGallery.stopTour(); gallery.dispatchEvent(new CustomEvent('wedding:gallerytourdone', { bubbles: true })); }
     if (playTrack) nextAdvanceAt = performance.now() + startDelay;
     syncTrackControls();
   });
@@ -6101,6 +6058,54 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
     else nextAdvanceAt = Math.max(nextAdvanceAt, performance.now() + startDelay);
   });
   window.setInterval(wakeTrack, 250);
+
+  // auto-scroll tour: run the open strip until its last photo is on screen, then switch to the next tab and do
+  // the same, then tell auto-scroll to carry on down the page
+  const canMove = (panel) => { const cycle = repeatWidth(panel); return cycle >= 3 && panel.scrollWidth - panel.clientWidth + 2 >= cycle; };
+  // distance until the last photo sits at the right edge (the strip loops, so from further along it goes round once more)
+  function tourNeed(panel) {
+    if (!canMove(panel)) return 0;
+    const cycle = repeatWidth(panel), end = cycle - panel.clientWidth, at = Math.max(0, panel.scrollLeft) % cycle;
+    return Math.max(0, at <= end + 2 ? end - at : cycle + end - at);
+  }
+  function tourStep(pixels) {
+    if (!tour || tour.switching) return;
+    tour.travelled += pixels;
+    if (tour.travelled < tour.need) return;
+    const dwell = canMove(activePanel) ? 1700 : 4000;      // a moment on the last photo (a short strip that fits the screen: a little longer)
+    nextAdvanceAt = performance.now() + dwell;
+    stopTrack();
+    tour.switching = window.setTimeout(() => {
+      if (!tour) return;
+      const next = tour.index + 1;
+      if (next >= galleryTabs.length) {
+        tour = null;
+        gallery.dispatchEvent(new CustomEvent('wedding:gallerytourdone', { bubbles: true }));
+        return;
+      }
+      selectTab(galleryTabs[next]);
+      activePanel.scrollLeft = 0;
+      nextAdvanceAt = performance.now() + 900;
+      tour = { index: next, travelled: 0, need: Infinity, switching: 0 };
+      requestAnimationFrame(() => { if (!tour) return; tour.need = tourNeed(activePanel); if (tour.need <= 0) tourStep(0); });
+    }, dwell);
+  }
+  window.weddingGallery = {
+    startTour() {
+      if (!activePanel || !playTrack || motionPreference.matches || dialog.open) return false;
+      const index = Math.max(0, galleryTabs.findIndex((tab) => tab.getAttribute('aria-selected') === 'true'));
+      tour = { index, travelled: 0, need: tourNeed(activePanel), switching: 0 };
+      nextAdvanceAt = Math.min(nextAdvanceAt, performance.now());
+      wakeTrack();
+      if (tour.need <= 0) tourStep(0);
+      return true;
+    },
+    stopTour() {
+      if (tour?.switching) window.clearTimeout(tour.switching);
+      tour = null;
+    },
+    touring: () => Boolean(tour)
+  };
 
   function renderViewer() {
     const photo = viewedPhotos[viewedIndex];
@@ -7237,10 +7242,8 @@ window.weddingMedia = {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const scrollingRoot = document.scrollingElement ?? document.documentElement;
   const speed = 60;
-  const accelerationTime = 240;
+  const accelerationTime = 1100;
   const idleDelay = 60000;
-  const galleryDelay = 60000;
-  const galleryCheckInterval = 120;
 
   let entered = false;
   let enabled = false;
@@ -7252,12 +7255,11 @@ window.weddingMedia = {
   let position = 0;
   let lastTarget = null;
   let scrollLimit = 0;
-  let lastPageY = window.scrollY;
-  let nextGalleryCheck = 0;
   let idleUntil = 0;
-  let galleryUntil = 0;
-  let galleryVisited = false;
-  let galleryNearby = Boolean(gallery);
+  let galleryNear = false;
+  let galleryTouring = false;
+  let galleryDone = false;
+  let lensNear = false;
 
   const watchBlockers = 'MutationObserver' in window ? new MutationObserver(() => refresh()) : null;
 
@@ -7267,13 +7269,9 @@ window.weddingMedia = {
       button.setAttribute('aria-pressed', String(state !== 'off'));
       label.textContent = state === 'off' ? 'เลื่อนอัตโนมัติ' : 'หยุดเลื่อน';
       document.documentElement.classList.toggle('auto-scroll-moving', state === 'moving');
-      status.textContent = state === 'gallery' ? 'พักเลื่อนอัตโนมัติ 60 วินาทีเพื่อดูแกลเลอรี' : '';
+      status.textContent = state === 'gallery' ? 'กำลังเลื่อนดูภาพในแกลเลอรี' : '';
     }
-    count.hidden = state !== 'gallery';
-    if (state === 'gallery') {
-      const countdown = `แกลเลอรี ${left} วิ.`;
-      if (count.textContent !== countdown) count.textContent = countdown;
-    }
+    count.hidden = true;
   }
 
   function stopFrame() {
@@ -7290,7 +7288,7 @@ window.weddingMedia = {
   let lensHolding = false;
   function lensHolds() {
     const clip = document.getElementById('lensVideo');
-    if (!clip) return false;
+    if (!clip || !lensNear) { lensEnds = 0; lensWatched = false; lensHolding = false; return false; }
     const box = clip.getBoundingClientRect(), view = window.innerHeight;
     if (box.bottom < 0 || box.top > view) { lensEnds = 0; lensWatched = false; lensHolding = false; return false; }
     // a clip that just ended counts as still playing: the next one starts a moment later
@@ -7308,30 +7306,28 @@ window.weddingMedia = {
   }
 
   function isBlocked() {
-    return document.hidden || document.querySelector('dialog[open], #musicPanel:not([hidden]), #videoWishForm[data-submitting="true"]') ||
+    return document.hidden || document.querySelector('dialog[open], #videoWishForm[data-submitting="true"]') ||
       document.activeElement?.closest('#rsvpForm, #videoWishForm') || isMediaPlaying();
   }
 
-  function readGallery(now, deliberate = false) {
-    if (!gallery || !galleryNearby) return false;
-    const box = gallery.getBoundingClientRect();
-    const view = window.innerHeight;
-    if (box.bottom <= 0 || box.top >= view) {
-      const changed = galleryVisited || galleryUntil > 0;
-      galleryVisited = false;
-      galleryUntil = 0;
-      return changed;
+  // gallery: keep moving until the photo strip sits in the middle of the screen, then wait while it runs through
+  // every Wedding photo, switches to Thai Style and runs through those too
+  function galleryHolds() {
+    if (!gallery || !galleryNear || galleryDone) return false;
+    if (galleryTouring) return true;
+    const strip = gallery.querySelector('.gallery-panel:not([hidden])');
+    if (!strip) return false;
+    const box = strip.getBoundingClientRect();
+    if (box.top + box.height / 2 > window.innerHeight / 2 + 4) return false;
+    if (!galleryTouring) {
+      galleryTouring = true;
+      if (!window.weddingGallery?.startTour?.()) {
+        galleryTouring = false;
+        galleryDone = true;
+        return false;
+      }
     }
-
-    const track = gallery.querySelector('.gallery-panel:not([hidden])');
-    const stage = track ? track.getBoundingClientRect() : box;
-    const inReadingArea = stage.top <= view * .76 && stage.bottom >= view * .28;
-    if (deliberate || (!galleryVisited && inReadingArea)) {
-      galleryVisited = true;
-      galleryUntil = now + galleryDelay;
-      return true;
-    }
-    return false;
+    return true;
   }
 
   function maxScroll() {
@@ -7341,7 +7337,7 @@ window.weddingMedia = {
   function step(time) {
     frame = 0;
     if (!enabled || button.dataset.state !== 'moving') return;
-    if (lensHolds()) { stopFrame(); refresh(); return; }
+    if (lensHolds() || galleryHolds()) { stopFrame(); refresh(); return; }
 
     // Layout and the mobile browser chrome can advance the native scroll
     // offset without a guest gesture. Rebase without starting the idle hold.
@@ -7353,7 +7349,8 @@ window.weddingMedia = {
     const elapsed = lastFrame === null ? 0 : Math.min(32, time - lastFrame);
     lastFrame = time;
     motionAge += elapsed;
-    const pace = speed * Math.min(1, motionAge / accelerationTime);
+    const ramp = Math.min(1, motionAge / accelerationTime);
+    const pace = speed * ramp * ramp * (3 - 2 * ramp);         // eases in gently every time it starts moving
     position = Math.min(scrollLimit, position + pace * elapsed / 1000);
 
     // Keep the fractional target between frames. The root uses instant native
@@ -7376,19 +7373,16 @@ window.weddingMedia = {
     window.clearTimeout(wakeTimer);
     wakeTimer = 0;
     const now = performance.now();
-    readGallery(now);
-    const galleryLeft = Math.max(0, galleryUntil - now);
     const idleLeft = Math.max(0, idleUntil - now);
     const blocked = isBlocked();
+    const touring = !idleLeft && !blocked && galleryHolds();
 
-    if (galleryLeft || idleLeft || blocked) {
+    if (touring || idleLeft || blocked) {
       stopFrame();
-      const seconds = Math.ceil(galleryLeft / 1000);
-      paint(seconds ? 'gallery' : 'waiting', seconds);
+      paint(touring ? 'gallery' : 'waiting');
       if (document.hidden) return;
-      const nextSecond = seconds ? galleryLeft - (seconds - 1) * 1000 : Infinity;
-      // Film state can change inside an iframe. Poll only while a blocker is active.
-      const nextWake = Math.min(nextSecond, idleLeft || Infinity, blocked ? 250 : Infinity);
+      // Film state can change inside an iframe, and the gallery tour ends on its own. Poll only while held.
+      const nextWake = Math.min(idleLeft || Infinity, blocked || touring ? 250 : Infinity);
       wakeTimer = window.setTimeout(refresh, Math.max(16, nextWake));
       return;
     }
@@ -7407,7 +7401,7 @@ window.weddingMedia = {
     enabled = next;
     idleUntil = 0;
     if (enabled) {
-      document.querySelectorAll('dialog, #musicPanel').forEach(node => {
+      document.querySelectorAll('dialog').forEach(node => {
         watchBlockers?.observe(node, { attributes: true, attributeFilter: ['open', 'hidden'] });
       });
       refresh();
@@ -7429,7 +7423,8 @@ window.weddingMedia = {
   }
 
   function onGuestInput(event) {
-    if (!event.isTrusted || event.target?.closest?.('#autoScrollDock, #envelope')) return;
+    // the music buttons and the song list never pause the scrolling
+    if (!event.isTrusted || event.target?.closest?.('#autoScrollDock, #envelope, .music-dock, #musicPanel')) return;
     if (event.type === 'keydown' && ['Alt', 'Control', 'Meta', 'Shift'].includes(event.key)) return;
     pauseAfterInput();
   }
@@ -7439,7 +7434,7 @@ window.weddingMedia = {
     dock.hidden = false;
     if (!reduceMotion.matches) {
       setEnabled(true);
-      idleUntil = performance.now() + 2500;   // a moment on the cover first
+      idleUntil = performance.now() + 3500;   // a moment on the cover first (photos and song settle in)
       refresh();
     }
   }, { once: true });
@@ -7450,40 +7445,43 @@ window.weddingMedia = {
     setEnabled(!enabled);
   });
 
-  if (gallery && 'IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(([entry]) => {
-      galleryNearby = entry.isIntersecting;
-      if (!galleryNearby) {
-        galleryVisited = false;
-        galleryUntil = 0;
-      }
+  if ('IntersectionObserver' in window) {
+    // position checks run only while the gallery or the hand-in-hand video is on screen
+    const near = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.target === gallery) {
+          galleryNear = entry.isIntersecting;
+          if (!galleryNear) {
+            if (galleryTouring) window.weddingGallery?.stopTour?.();
+            galleryTouring = false;
+            galleryDone = false;
+          }
+        } else lensNear = entry.isIntersecting;
+      });
       refresh();
     });
-    observer.observe(gallery);
+    if (gallery) near.observe(gallery);
+    const lensFrame = document.querySelector('.moments-video');
+    if (lensFrame) near.observe(lensFrame);
+  } else {
+    galleryNear = Boolean(gallery);
+    lensNear = true;
   }
 
+  // the gallery finished its tour: carry on down the page
+  document.addEventListener('wedding:gallerytourdone', () => {
+    galleryTouring = false;
+    galleryDone = true;
+    refresh();
+  });
+  // the guest swiped or picked photos themselves: end the tour and give them time
   document.addEventListener('wedding:galleryactivity', () => {
     if (!enabled) return;
-    const now = performance.now();
-    if (readGallery(now, true)) {
-      idleUntil = now + idleDelay;
-      refresh();
-    } else {
-      pauseAfterInput(now);
-    }
+    if (galleryTouring) window.weddingGallery?.stopTour?.();
+    galleryTouring = false;
+    if (galleryNear) galleryDone = true;
+    pauseAfterInput();
   });
-
-  window.addEventListener('scroll', () => {
-    if (!enabled || !galleryNearby) return;
-    const y = window.scrollY;
-    if (y === lastPageY) return;
-    lastPageY = y;
-
-    const now = performance.now();
-    if (now < nextGalleryCheck) return;
-    nextGalleryCheck = now + galleryCheckInterval;
-    if (readGallery(now)) refresh();
-  }, { passive: true });
 
   ['wheel', 'touchstart', 'touchmove', 'pointerdown'].forEach(name => {
     document.addEventListener(name, onGuestInput, { capture: true, passive: true });
