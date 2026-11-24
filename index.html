@@ -414,7 +414,8 @@ p,h1,h2,h3,h4,figure {margin:0}
 .parents>div:last-child {text-align:start}
 .parents p {white-space:nowrap}
 .parents>span {font:400 italic 1.45rem/1 var(--display);color:#9e7596}
-.invitation-text {margin:1.7em auto .8em;max-width:27em;font-size:1.02rem;text-wrap:balance}
+.invitation-text {margin:1.7em auto .8em;max-width:27em;font-size:1.02rem;container-type:inline-size}
+.invitation-text > span {font-size:min(1em,5.6cqi);white-space:nowrap}
 .gold-rule {display:flex;align-items:center;justify-content:center;gap:9px;color:#9e764f;margin:1em auto 1.35em}
 .gold-rule::before,.gold-rule::after {content:"";width:20%;height:1px;background:linear-gradient(90deg,transparent,#be9b7b9c)}
 .gold-rule::after {rotate:180deg}
@@ -4153,7 +4154,8 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
             <span aria-label="และ" lang="en">and</span>
             <div><p data-invite-line>คุณพ่อวิรัตน์ จิตเจริญดี</p><p data-invite-line style="--invite-line:1">คุณแม่จุฑามาศ จิตเจริญดี</p></div>
           </div>
-          <p class="invitation-text" data-invite-line style="--invite-line:2">มีความยินดีขอเรียนเชิญท่านเพื่อเป็นเกียรติเนื่องในพิธีมงคลสมรสระหว่าง</p>
+          <p class="invitation-text" data-invite-line style="--invite-line:2"><span>มีความยินดีขอเรียนเชิญท่านเพื่อเป็นเกียรติ</span><br>
+            <span>เนื่องในพิธีมงคลสมรสระหว่าง</span></p>
           <div class="gold-rule" aria-hidden="true">✦</div>
           <div class="couple-names">
             <div data-invite-line style="--invite-line:3"><p class="person-role" lang="en">Bride</p><p class="person-name"><span class="person-first">กรรณิการ์</span> <span class="person-last">ละอองทอง</span></p><p class="person-nickname">(อ้อย)</p></div>
@@ -4667,8 +4669,8 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
           <progress id="videoWishProgress" aria-label="ความคืบหน้าการเตรียมและอัปโหลดวิดีโอ" max="100" hidden></progress>
         </div>
         <div class="video-wish-alternate">
-          <a class="button button--outline video-wish-long-btn" id="videoWishLongLink" href="https://docs.google.com/forms/d/e/1FAIpQLSd_893LkN7eTxxXHmqjoYeBbMHWSpuvTxez7roAZiO7txSt8Q/viewform" target="_blank" rel="noopener noreferrer" aria-describedby="videoWishLongNote"><span>ส่งไฟล์ใหญ่ผ่าน Google Form</span> <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7"/></svg></a>
-          <p id="videoWishLongNote" class="video-wish-long-note">สำหรับคลิปยาวหรือ<span class="nw">ไฟล์เกิน 25 MB</span> · เปิดในแท็บใหม่</p>
+          <a class="button button--outline video-wish-long-btn" id="videoWishLongLink" href="https://docs.google.com/forms/d/e/1FAIpQLSd_893LkN7eTxxXHmqjoYeBbMHWSpuvTxez7roAZiO7txSt8Q/viewform" target="_blank" rel="noopener noreferrer" aria-describedby="videoWishLongNote"><span>ส่งคลิปยาวเกิน 30 วินาที คลิก!!!</span> <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7"/></svg></a>
+          <p id="videoWishLongNote" class="video-wish-long-note">สำหรับคลิปยาวหรือ<span class="nw">ไฟล์เกิน 25 MB</span> · ส่งผ่าน Google Form ในแท็บใหม่</p>
         </div>
         <p id="videoWishStatus" class="video-wish-status" role="status" aria-live="polite" data-state="idle"></p>
         <p id="videoWishOversize" class="video-wish-oversize" hidden><a class="text-link" href="https://docs.google.com/forms/d/e/1FAIpQLSd_893LkN7eTxxXHmqjoYeBbMHWSpuvTxez7roAZiO7txSt8Q/viewform" target="_blank" rel="noopener noreferrer">ส่งไฟล์ผ่าน Google Form</a></p>
@@ -5155,11 +5157,11 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
     }
   }
 
-  function openEnvelope() {
+  function openEnvelope(event) {
     if (envelopeUnsealing || overlay.classList.contains('is-open')) return;
     envelopeUnsealing = true;
     playCardSound(true);
-    window.weddingMedia?.start();
+    window.weddingMedia?.start(event);
     overlay.classList.add('is-unsealing');
     const showContents = () => {
       overlay.classList.remove('is-unsealing');
@@ -5179,7 +5181,7 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
     else setTimeout(showContents, 400);
   }
 
-  function enterInvitation() {
+  function enterInvitation(event) {
     if (dismissing || !overlay.classList.contains('is-open')) return;
     dismissing = true;
     playCardSound();
@@ -5187,7 +5189,7 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
     site.inert = false;
     site.classList.add('is-invited');
     document.body.classList.remove('envelope-active');
-    window.weddingMedia?.enter();
+    window.weddingMedia?.enter(event);
     const finish = () => { overlay.hidden = true; };
     if (motion.matches) finish();
     else setTimeout(finish, 460);
@@ -5223,7 +5225,7 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
   overlay.addEventListener('keydown', event => {
     if (dismissing) return;
     if (event.key === 'Escape' && overlay.classList.contains('is-open')) {
-      enterInvitation();
+      enterInvitation(event);
       return;
     }
     if (event.key !== 'Tab') return;
@@ -5485,38 +5487,87 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
   const clipFull = $('#momentFull');
   const momentDialog = $('#momentDialog');
   const momentStage = $('#momentStage');
-  const clipUrl = new URL(clip.dataset.file, document.baseURI).href;
+  const clipBase = /^https?:$/.test(location.protocol)
+    ? document.baseURI : 'https://thanudkitjit.github.io/aoy-aef-wedding/';
+  const clipUrl = new URL(clip.dataset.file, clipBase).href;
   clip.defaultMuted = true;
   clip.muted = true;
   clip.playsInline = true;
+  let clipNear = !('IntersectionObserver' in window);
   let clipInView = false;
   let clipPausedByGuest = false;
   let clipFinished = false;
   let clipLoading = false;
   let clipRequest = 0;
   let ownPause = false;
+  let autoplayAttempts = 0;
+  let autoplayBlocked = '';
+  let retryTimer = 0;
+  let visibilityTimer = 0;
 
   const clipActive = () => clipLoading || (!clip.paused && !clip.ended);
-  const clipShowing = () => momentDialog.open || (site.classList.contains('is-invited') && clipInView && !document.hidden);
+  function prepareMomentSource() {
+    if (clip.getAttribute('src')) return;
+    clip.preload = 'metadata';
+    clip.src = clipUrl;
+  }
+
+  function inMomentViewport() {
+    const visual = window.visualViewport;
+    const top = visual?.offsetTop ?? 0;
+    const left = visual?.offsetLeft ?? 0;
+    const height = visual?.height || window.innerHeight;
+    const width = visual?.width || window.innerWidth;
+    const box = clipHome.getBoundingClientRect();
+    const shown = Math.min(box.bottom, top + height) - Math.max(box.top, top);
+    const threshold = clipInView ? .12 : .20;
+    return box.height > 0 && box.right > left && box.left < left + width &&
+      shown >= Math.min(box.height * threshold, height * .45);
+  }
+
+  function clearMomentRetry() {
+    window.clearTimeout(retryTimer);
+    retryTimer = 0;
+  }
+
+  function retryMomentPlayback() {
+    if (!retryTimer) return;
+    clearMomentRetry();
+    syncMomentVisibility();
+  }
   function updateMomentControls() {
     const playing = clipActive();
     clipPlay.textContent = playing ? 'หยุดคลิป' : 'เล่นคลิป';
     clipPlay.setAttribute('aria-pressed', String(playing));
   }
   function playMoment(manual = false) {
-    if (!clip.getAttribute('src')) clip.src = clipUrl;
-    else if (manual && clip.error) clip.load();
+    prepareMomentSource();
+    if (manual && clip.error) clip.load();
     if (clipFinished || clip.ended) {
       clipFinished = false;
       clip.currentTime = 0;
     }
-    if (clipActive()) return;
+    if (clipActive() || (!manual && (autoplayBlocked || autoplayAttempts >= 2))) return;
+    clearMomentRetry();
+    if (!manual) autoplayAttempts++;
+    clip.defaultMuted = true;
     clip.muted = true;
+    clip.playsInline = true;
     const request = ++clipRequest;
     clipLoading = true;
     const handleFailure = (error) => {
       if (request !== clipRequest) return;
       clipLoading = false;
+      if (!manual) {
+        if (error.name === 'NotAllowedError' || error.name === 'NotSupportedError' || clip.error) {
+          // Leave the native muted-autoplay opt-in to the browser on policy denial.
+          // Native failure or user Pause still leaves an explicit Play button.
+          autoplayBlocked = error.name === 'NotAllowedError' && !clip.error ? 'policy' : 'media';
+          if (autoplayBlocked === 'media') clip.autoplay = false;
+        } else if (autoplayAttempts < 2 && clipInView) {
+          retryTimer = window.setTimeout(retryMomentPlayback, 450);
+        }
+      }
       updateMomentControls();
       if (manual && error.name !== 'AbortError' && error.name !== 'NotAllowedError') {
         window.dispatchEvent(new CustomEvent('wedding:notice', { detail: 'เล่นคลิปนี้ไม่ได้ ลองกดเล่นอีกครั้ง' }));
@@ -5534,6 +5585,8 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
     updateMomentControls();
   }
   function pauseMoment() {
+    clip.autoplay = false;
+    clearMomentRetry();
     clipRequest++;
     const wasLoading = clipLoading;
     clipLoading = false;
@@ -5544,29 +5597,40 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
     updateMomentControls();
   }
   function syncMomentVisibility() {
-    if (!clipShowing()) {
-      pauseMoment();
-      if (!clipInView && !momentDialog.open && clipFinished) {
+    const wasVisible = clipInView;
+    clipInView = site.classList.contains('is-invited') && !document.hidden && inMomentViewport();
+    if (!clipInView && !momentDialog.open) {
+      if (clip.autoplay || clipActive() || retryTimer) pauseMoment();
+      if (!document.hidden && clipFinished) {
         clipFinished = false;
         clip.currentTime = 0;
       }
       return;
     }
-    if (motion.matches || clipPausedByGuest || clipFinished) return;
-    if (!momentDialog.open && document.documentElement.classList.contains('auto-scroll-moving')) {
-      if (!clip.getAttribute('src')) {
-        clip.preload = 'metadata';
-        clip.src = clipUrl;
-      }
-      return;
+
+    if (!wasVisible && clipInView) {
+      autoplayAttempts = 0;
+      autoplayBlocked = '';
     }
-    playMoment();
+    if (motion.matches || clipPausedByGuest || clipFinished || clip.error) return;
+
+    // Use the real, muted native video as soon as it is in the visual viewport.
+    // Source assignment began on Enter; play() covers browsers that need a request after readiness.
+    prepareMomentSource();
+    if (!momentDialog.open && autoplayBlocked !== 'media') clip.autoplay = true;
+    if (!retryTimer) playMoment();
+  }
+
+  function checkMomentSoon() {
+    if (visibilityTimer || (!clipNear && !clipInView)) return;
+    visibilityTimer = window.setTimeout(() => {
+      visibilityTimer = 0;
+      syncMomentVisibility();
+    }, 90);
   }
 
   window.weddingMoment = {
-    playAtCenter() {
-      if (!motion.matches && !clipPausedByGuest && !clipFinished && !clip.error && !momentDialog.open && !document.hidden) playMoment();
-    },
+    playAtCenter: syncMomentVisibility,
     get active() { return clipActive(); },
     get guestPaused() { return clipPausedByGuest; }
   };
@@ -5586,18 +5650,28 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
     updateMomentControls();
   });
   clip.addEventListener('pause', () => {
-    if (!ownPause && !clip.ended && momentDialog.open) clipPausedByGuest = true;   // the video's own pause button
+    if (!ownPause && !clip.ended && momentDialog.open) {
+      clipPausedByGuest = true;
+      clip.autoplay = false;
+      clearMomentRetry();
+    }
     ownPause = false;
     updateMomentControls();
   });
   clip.addEventListener('ended', () => {
+    clip.autoplay = false;
+    clearMomentRetry();
     clipFinished = true;
     updateMomentControls();
   });
   clip.addEventListener('error', () => {
+    clip.autoplay = false;
+    clearMomentRetry();
     clipLoading = false;
+    autoplayBlocked = 'media';
     updateMomentControls();
   });
+  clip.addEventListener('canplay', retryMomentPlayback);
 
   // full size: the same video moves into a full-screen dialog, so it keeps playing (the page song keeps going)
   clipFull.addEventListener('click', () => {
@@ -5618,12 +5692,20 @@ window.weddingFallbacks = (() => { let cache = null; return () => { if (cache) r
 
   if ('IntersectionObserver' in window) {
     const watchClip = new IntersectionObserver(entries => {
-      clipInView = entries[entries.length - 1].intersectionRatio >= .15;
+      clipNear = entries[entries.length - 1].isIntersecting;
       syncMomentVisibility();
-    }, { threshold:[0,.15] });
+    }, { threshold:[0,.20,.40] });
     watchClip.observe(clipHome);
   }
-  site.addEventListener('wedding:enter', syncMomentVisibility, { once:true });
+  site.addEventListener('wedding:enter', () => {
+    if (!motion.matches) prepareMomentSource();
+    syncMomentVisibility();
+  }, { once:true });
+  window.addEventListener('scroll', checkMomentSoon, { passive:true });
+  window.addEventListener('resize', checkMomentSoon, { passive:true });
+  window.visualViewport?.addEventListener?.('resize', checkMomentSoon, { passive:true });
+  window.visualViewport?.addEventListener?.('scroll', checkMomentSoon, { passive:true });
+  window.addEventListener('pageshow', syncMomentVisibility);
   document.addEventListener('visibilitychange', syncMomentVisibility);
   motion.addEventListener?.('change', event => {
     if (event.matches) pauseMoment();
@@ -6868,7 +6950,7 @@ function playPrimarySong() {
   audioEl.muted = muted;
   const wait = loadedPrimary ? 5500 : Math.max(0, Math.min(4000, musicLoadDeadline - performance.now()));
   armMusicWatchdog(request, wait);
-  // Request playback during the opening click and keep one Audio element for retry/resume.
+  // Keep this element for the entry gesture, automatic song changes and retries.
   audioEl.play().catch(error => {
     if (error.name !== 'AbortError') musicSourceFailed(request, error.name === 'NotAllowedError');
   });
@@ -6927,6 +7009,7 @@ function toggleMusicPanel(force) {
   musicInfo.setAttribute('aria-expanded', String(!musicPanel.hidden));
 }
 function userToggleMusic() {
+  if (!siteOpened) return;
   userMusicChoice = true;
   if (isPlaying) { pauseMusic(); return; }
   Piano.unlock();
@@ -6937,6 +7020,7 @@ musicButton.addEventListener('click', userToggleMusic);
 musicToggle.addEventListener('click', userToggleMusic);
 musicInfo.addEventListener('click', () => toggleMusicPanel());
 function selectUserTrack(index) {
+  if (!siteOpened) return;
   const song = PLAYLIST[(index + PLAYLIST.length) % PLAYLIST.length];
   userMusicChoice = true;
   Piano.unlock();
@@ -7407,14 +7491,28 @@ $$('[data-sheet-link]').forEach(link => { link.href = GOOGLE_SHEET_VIEW_URL; });
 
 window.weddingMedia = {
   soundOn: () => isPlaying && !muted,
-  start() {
-    if (isPlaying || userMusicChoice) return;
+  start(event) {
+    if (!(event instanceof Event && event.isTrusted) || siteOpened || isPlaying || userMusicChoice) return;
     Piano.unlock();
+    recoveryTrack = null;
+    musicMode = 'piano';
     resumeMusic();
   },
-  enter() {
+  enter(event) {
+    if (siteOpened) return;
     siteOpened = true;
-    $('#musicDock').hidden = false;
+    musicDock.hidden = false;
+    if (event instanceof Event && event.isTrusted && (isPlaying || !userMusicChoice)) {
+      // Start the first recording in the actual entry gesture for Safari's media policy.
+      Piano.unlock();
+      isPlaying = true;
+      playRecording(0);
+      return;
+    }
+    pauseMusic();
+    recoveryTrack = null;
+    musicMode = 'track';
+    updateMusicUI();
   },
   videoHoldsScroll
 };
@@ -7549,8 +7647,9 @@ window.weddingMedia = {
   }
 
   lens?.addEventListener('playing', () => {
-    if (!lensVisit) return;
-    lensVisit.started = true;
+    if (!enabled || !lensNear) return;
+    if (lensVisit) lensVisit.started = true;
+    else lensVisited = false; // Readiness can settle just after the start-up hold has elapsed.
     refresh();
   });
   lens?.addEventListener('ended', () => {
